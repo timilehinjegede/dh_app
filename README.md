@@ -1,8 +1,8 @@
-# Dexter Health Assessment
+# Dexter Health
 
 A new Flutter project.
 
-# Technical Assignment Readme
+# Technical Readme
 
 ## Difficulties Encountered
 1. **Native Android Testing**: I needed more time to write tests for the native Android code due to less frequent use of the platform, which necessitated additional consultation of the documentation.
