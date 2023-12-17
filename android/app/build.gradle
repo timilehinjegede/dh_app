@@ -49,6 +49,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        compileSdkVersion 34
     }
 
     buildTypes {
@@ -64,4 +65,10 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
+
+    // unit testing dependencies
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+}

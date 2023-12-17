@@ -1,4 +1,5 @@
 // ignore_for_file: constant_identifier_names
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dexter_health/core/core.dart';
@@ -23,20 +24,19 @@ class DioHttpApi implements IApiClient {
     final presetHeaders = <String, String>{
       Headers.acceptHeader: '*/*',
       HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader: 'Bearer KsJ5Ag3',
     };
 
     _dio.options.headers.addAll(presetHeaders);
 
     if (kDebugMode) {
-      _dio.interceptors.addAll(
-        [
-          LogInterceptor(
-            requestHeader: false,
-            requestBody: true,
-            responseBody: true,
-            error: true,
-          ),
-        ],
+      _dio.interceptors.add(
+        LogInterceptor(
+          requestHeader: false,
+          requestBody: true,
+          responseBody: true,
+          error: true,
+        ),
       );
     }
   }
@@ -44,77 +44,26 @@ class DioHttpApi implements IApiClient {
   static String baseUrl = AppConfig.baseUrl;
 
   @override
-  Future<Response> get(
+  Future<Response> uploadFile(
     String uri, {
-    Map<String, dynamic>? queryParameters,
-    Map<String, dynamic>? extraHeaders,
+    required File file,
   }) async {
     try {
-      if (extraHeaders != null) {
-        _dio.options.headers.addAll(extraHeaders);
-      }
-      final response = await _dio.get(
-        uri,
-        queryParameters: queryParameters,
+      final formData = FormData.fromMap(
+        {
+          'file': await MultipartFile.fromFile(
+            file.path,
+            filename: 'file',
+          ),
+        },
       );
 
-      return response;
-    } catch (e) {
-      throw ApiException.getException(e);
-    }
-  }
-
-  @override
-  Future<Response> post(
-    String uri, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-  }) async {
-    try {
       final response = await _dio.post(
         uri,
-        data: data,
-        queryParameters: queryParameters,
+        data: formData,
       );
 
-      return response;
-    } catch (e) {
-      throw ApiException.getException(e);
-    }
-  }
-
-  @override
-  Future<Response> delete(
-    String uri, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-  }) async {
-    try {
-      final response = await _dio.delete(
-        uri,
-        data: data,
-        queryParameters: queryParameters,
-      );
-
-      return response;
-    } catch (e) {
-      throw ApiException.getException(e);
-    }
-  }
-
-  @override
-  Future<Response> put(
-    String uri, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-  }) async {
-    try {
-      final response = await _dio.put(
-        uri,
-        data: data,
-        queryParameters: queryParameters,
-      );
-
+      log('response is ${response.data}');
       return response;
     } catch (e) {
       throw ApiException.getException(e);
@@ -127,31 +76,35 @@ class DioHttpApi implements IApiClient {
   }
 
   @override
-  Future<Response> uploadFiles(
+  Future<Response> delete(
     String uri, {
-    required List<File> files,
-  }) async {
-    try {
-      final formData = FormData.fromMap(
-        {
-          'files': [
-            for (final file in files)
-              await MultipartFile.fromFile(
-                file.path,
-              ),
-          ],
-        },
-      );
+    data,
+    Map<String, dynamic>? queryParameters,
+  }) {
+    throw UnimplementedError();
+  }
 
-      final response = await _dio.post(
-        uri,
-        data: formData,
-      );
+  @override
+  Future<Response> get(String uri, {Map<String, dynamic>? queryParameters}) {
+    throw UnimplementedError();
+  }
 
-      return response;
-    } catch (e) {
-      throw ApiException.getException(e);
-    }
+  @override
+  Future<Response> post(
+    String uri, {
+    data,
+    Map<String, dynamic>? queryParameters,
+  }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Response> put(
+    String uri, {
+    data,
+    Map<String, dynamic>? queryParameters,
+  }) {
+    throw UnimplementedError();
   }
 }
 
