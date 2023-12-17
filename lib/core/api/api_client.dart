@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 
 abstract class IApiClient {
@@ -33,6 +31,6 @@ abstract class IApiClient {
   /// upload file
   Future<Response> uploadFile(
     String uri, {
-    required File file,
+    required String filePath,
   });
 }

@@ -19,8 +19,7 @@ class SpeechToTextService {
 
   List<int> _audioBuffer = [];
   Timer? _timer;
-  // int _targetDurationMs = 5000; // 5 seconds
-  final int _targetDurationMs = 10000; // 10 seconds
+  final int _targetDurationMs = 5000; // 5 seconds
 
   SpeechToTextService({required this.onData}) {
     _channel.setMethodCallHandler(methodCallHandler);

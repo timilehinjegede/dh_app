@@ -1,5 +1,8 @@
+import 'package:dexter_health/features/dashboard/domain/bloc/dashboard_bloc.dart';
+import 'package:dexter_health/service_locator.dart';
 import 'package:dexter_health/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/dashboard/presentation/pages/dashboard_page.dart';
 
@@ -9,6 +12,8 @@ class DexterApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final dashboardBloc = serviceLocator<DashboardBloc>();
+
     return MaterialApp(
       title: 'Dexter Health',
       debugShowCheckedModeBanner: false,
@@ -21,7 +26,14 @@ class DexterApp extends StatelessWidget {
             data: MediaQuery.of(context).copyWith(
               textScaler: const TextScaler.linear(1),
             ),
-            child: const DashboardPage(),
+            child: BlocProvider<DashboardBloc>(
+              create: (context) {
+                dashboardBloc.add(const DashboardSetupEvent());
+
+                return dashboardBloc;
+              },
+              child: const DashboardPage(),
+            ),
           );
         },
       ),

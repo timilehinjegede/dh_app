@@ -46,13 +46,13 @@ class DioHttpApi implements IApiClient {
   @override
   Future<Response> uploadFile(
     String uri, {
-    required File file,
+    required String filePath,
   }) async {
     try {
       final formData = FormData.fromMap(
         {
           'file': await MultipartFile.fromFile(
-            file.path,
+            filePath,
             filename: 'file',
           ),
         },
