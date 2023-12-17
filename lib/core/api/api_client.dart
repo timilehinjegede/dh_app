@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 
 abstract class IApiClient {
@@ -30,9 +28,9 @@ abstract class IApiClient {
     Map<String, dynamic>? queryParameters,
   });
 
-  /// upload files
-  Future<Response> uploadFiles(
+  /// upload file
+  Future<Response> uploadFile(
     String uri, {
-    required List<File> files,
+    required String filePath,
   });
 }

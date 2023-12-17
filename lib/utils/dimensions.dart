@@ -15,7 +15,7 @@ const Curve kCurve = Curves.easeInOut;
 class Dims {
   const Dims._();
   // the app was designed on an iphone frame with w:h = 360:800
-  static Size designSize = const Size(428, 926);
+  static Size designSize = const Size(360, 800);
   // the device [running the application] size
   static late Size deviceSize;
 

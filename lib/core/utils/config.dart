@@ -32,12 +32,12 @@ class _Constants {
   static const appName = 'APP_NAME';
 
   static Map<String, String> developmentConstants = {
-    baseUrl: '',
+    baseUrl: 'https://35.207.149.36:443',
     appName: 'Dexter Health Test',
   };
 
   static Map<String, String> prodConstants = {
-    baseUrl: '',
+    baseUrl: 'https://35.207.149.36:443',
     appName: 'Dexter Health',
   };
 }

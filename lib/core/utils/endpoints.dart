@@ -5,7 +5,9 @@ import 'package:dexter_health/core/core.dart';
 
 final BASE_URL = AppConfig.baseUrl;
 
-class _AppEndpoints {}
+class _AppEndpoints {
+  final String speechToText = '$BASE_URL/stt_flutter_tech_assignment';
+}
 
 /// endpoints
 final appEndpoints = _AppEndpoints();
